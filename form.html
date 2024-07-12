@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shawl Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .btn {
+            margin-top: 1rem;
+            display: inline-block;
+            color: #fff;
+            background: var(--black);
+            border-radius: .5rem;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--green);
+            letter-spacing: .1rem;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 100%;
+        }
+
+        .dropdown-content img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .dropdown-content div {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .selected-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .selected-option img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        :root{
+            --green: #E59BE9;
+            --black: #8644A2;
+            --light-color:#D862BC;
+            --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+        }
+        a {
+  color: blue;
+  text-decoration: none; /* no underline */
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Order Your Shawl</h2>
+        <form action="/submit_order" method="post">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="shawl_type">Shawl Type:</label>
+                <div class="dropdown">
+                    <div id="selected-shawl-type" class="selected-option">
+                        <img src="images/logo.png" alt="" id="shawl-type-img">
+                        <span>Select Shawl Type</span>
+                    </div>
+                    <div class="dropdown-content" id="shawl-dropdown">
+                        <div data-value="Satin Shawl" onclick="selectShawlType('satin shawl', 'images/Shawl 5.jpg')">
+                            <img src="images/Shawl 5.jpg" alt="Satin Shawl">
+                            Satin Shawl
+                        </div>
+                        <div data-value="Silk Shawl" onclick="selectShawlType('silk shawl', 'images/Shawl 4.jpg')">
+                            <img src="images/Shawl 4.jpg" alt="Silk Shawl">
+                            Silk Shawl
+                        </div>
+                        <div data-value="bawal cotton" onclick="selectShawlType('bawal cotton', 'images/Bawal Printed 2.jpg')">
+                            <img src="images/Bawal Printed 2.jpg" alt="Bawal Cotton">
+                            Bawal Cotton
+                        </div>
+                        <div data-value="Bawal Shawl" onclick="selectShawlType('bawal shawl', 'images/Bawal Kosong 2.jpg')">
+                            <img src="images/Bawal Kosong 2.jpg" alt="Bawal Shawl">
+                            Bawal Shawl
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="shawl_type" name="shawl_type" required>
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <div class="dropdown">
+                    <div id="selected-color" class="selected-option">
+                        <span>Select Color</span>
+                    </div>
+                    <div class="dropdown-content" id="color-dropdown">
+                        <div data-value="burgandy" onclick="selectColor('burgandy')">
+                            Burgandy
+                        </div>
+                        <div data-value="black" onclick="selectColor('black')">
+                            Black
+                        </div>
+                        <div data-value="olive" onclick="selectColor('olive')">
+                            Olive
+                        </div>
+                        <div data-value="rosegold" onclick="selectColor('rosegold')">
+                            Rosegold
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="color" name="color" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="comments">Additional Comments:</label>
+                <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+            <input type="submit" value="Submit Order">
+            <a href="index.html" class="btn">Back to Home</a>
+        </form>
+    </div>
+
+    <script>
+        function selectShawlType(type, imgSrc) {
+            document.getElementById('shawl_type').value = type;
+            document.getElementById('shawl-type-img').src = imgSrc;
+            document.getElementById('selected-shawl-type').querySelector('span').innerText = type.charAt(0).toUpperCase() + type.slice(1);
+        }
+
+        function selectColor(color) {
+            document.getElementById('color').value = color;
+            document.getElementById('selected-color').querySelector('span').innerText = color.charAt(0).toUpperCase() + color.slice(1);
+        }
+    </script>
+
+</body>
+
+</html>
